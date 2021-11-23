@@ -43,7 +43,7 @@ class WelcomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        SelectableText(
           Get.find<AppLocalizationController>().getTranslatedValue("portfolio"),
           style: TextStyle(
             fontSize: _size.screenType == ScreensType.pc
@@ -92,17 +92,17 @@ class WelcomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
+                      SelectableText(
                         Get.find<AppLocalizationController>()
                             .getTranslatedValue("about"),
                         style: _size.textTheme(TextType.p),
                       ),
-                      Text(
+                      SelectableText(
                         Get.find<AppLocalizationController>()
                             .getTranslatedValue("portfolio"),
                         style: _size.textTheme(TextType.p),
                       ),
-                      Text(
+                      SelectableText(
                         Get.find<AppLocalizationController>()
                             .getTranslatedValue("contact"),
                         style: _size.textTheme(TextType.p),
@@ -150,7 +150,7 @@ class WelcomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           Get.find<AppLocalizationController>().getTranslatedValue("hello"),
           style: _size.textTheme(TextType.h2),
         ),
@@ -162,8 +162,8 @@ class WelcomeScreen extends StatelessWidget {
           Get.find<AppLocalizationController>().getTranslatedValue("Sameh"),
           style: _size.textTheme(TextType.h1),
         ),
-        RichText(
-          text: TextSpan(
+        SelectableText.rich(
+          TextSpan(
             children: [
               TextSpan(
                 text: Get.find<AppLocalizationController>()
@@ -189,7 +189,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: _size.height(40)),
-        Text(
+        SelectableText(
           Get.find<AppLocalizationController>().getTranslatedValue("find_me"),
           style: _size.textTheme(TextType.p).copyWith(
                 fontWeight: FontWeight.normal,

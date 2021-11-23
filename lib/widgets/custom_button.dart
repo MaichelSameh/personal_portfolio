@@ -22,7 +22,7 @@ class CustomBorderedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = Size(context);
     return MouseRegion(
-      cursor: MouseCursor.uncontrolled,
+      cursor: SystemMouseCursors.click,
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: _size.height(verticalPadding),
@@ -59,7 +59,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = Size(context);
     return MouseRegion(
-      cursor: MouseCursor.uncontrolled,
+      cursor: SystemMouseCursors.click,
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: _size.height(verticalPadding),

@@ -64,7 +64,7 @@ class Size {
                   ? 80
                   : 30,
           color: Colors.white,
-          letterSpacing: -1,
+          height: 1,
         );
 
       case TextType.h2:
@@ -102,14 +102,15 @@ class Size {
 
       case TextType.p:
         return TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: screenType == ScreensType.pc
-                ? 15
-                : screenType == ScreensType.tablet
-                    ? 20
-                    : 13,
-            color: Colors.white,
-            letterSpacing: -1);
+          fontWeight: FontWeight.w300,
+          fontSize: screenType == ScreensType.pc
+              ? 15
+              : screenType == ScreensType.tablet
+                  ? 20
+                  : 13,
+          color: Colors.white,
+          height: 2.5,
+        );
     }
   }
 }
