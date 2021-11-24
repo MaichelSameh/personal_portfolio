@@ -44,3 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# My sensitive data
+/web/node_modules/
+/web/package-lock.json
+/web/.env
