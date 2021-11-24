@@ -77,9 +77,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
             ),
             buildCategoriesRow(_size),
             Container(
-              height: 1400,
+              constraints:
+                  BoxConstraints(maxHeight: projects.length > 3 ? 1400 : 700),
               padding: EdgeInsets.symmetric(vertical: _size.height(113)),
               child: GridView.builder(
+                shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 505,

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class ProjectInfo {
   late List<dynamic> _imageURL;
   late String _name;
@@ -35,8 +37,8 @@ class ProjectInfo {
     return {
       'image_url': imageURL,
       'name': name,
-      'id': id,
       "description": description,
+      "crated_at": DateFormat("yyyy-MM-dd").format(DateTime.now()),
     };
   }
 

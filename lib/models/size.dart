@@ -84,7 +84,7 @@ class Size {
           fontSize: screenType == ScreensType.pc
               ? 30
               : screenType == ScreensType.tablet
-                  ? 35
+                  ? 25
                   : 18,
           color: Colors.white,
         );

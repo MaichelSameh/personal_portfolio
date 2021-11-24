@@ -12,5 +12,9 @@
     "download_cv": "download CV",
     "about_text": "Creative Mobile Application Developer talented at integrating novel design elements and interaction points to build new and exciting user experiences. Known for advancing Flutter apps through unique and unusual interfaces. Committed to presenting users with easy-to-use interfaces and entertainment elements.",
     "about_me": "About me",
-    "all": "All"
+    "all": "All",
+    "capability": "Capability",
+    "capability_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation.",
+    "what_clients_says": "What my clients says",
+    "what_clients_says_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation."
 }

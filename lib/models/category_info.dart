@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class CategoryInfo {
   late String _title;
   late String _id;
@@ -30,6 +32,13 @@ class CategoryInfo {
     _title = title ?? _title;
     _id = id ?? _id;
     _createdAt = createdAt ?? _createdAt;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "title": title,
+      "crated_at": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+    };
   }
 
   @override
