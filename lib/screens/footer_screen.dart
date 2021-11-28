@@ -12,7 +12,7 @@ class FooterScreen extends StatelessWidget {
     return Container(
       width: _size.screenWidth(),
       height: _size.height(670),
-      color: MyPalette.secondary_color,
+      color: MyPalette.primary_color,
       child: Column(
         children: const [
           SizedBox(width: double.infinity),

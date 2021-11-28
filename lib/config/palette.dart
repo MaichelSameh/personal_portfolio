@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 
 class MyPalette {
-  static const Color primary_color = Color.fromRGBO(14, 12, 56, 1);
-  static const Color secondary_color = Color.fromRGBO(4, 11, 51, 1);
-  static const Color third_color = Color.fromRGBO(255, 5, 19, 1);
+  static const Color primary_color = Color.fromRGBO(0, 0, 0, 1);
+  static const Color secondary_color = Color.fromRGBO(241, 101, 48, 1);
 }

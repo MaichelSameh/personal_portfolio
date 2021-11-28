@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/localization_controller.dart';
 import '../config/palette.dart';
@@ -23,7 +24,9 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   String? selectedCategory;
   String? hoveredProject;
 
-  Future<void> init() async {
+  int currentPage = 0;
+
+  Future<void> initCategories() async {
     categories.clear();
     QuerySnapshot<Map<String, dynamic>> categorySnapshot =
         await instance.collection("categories").get();
@@ -33,13 +36,23 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
         in categoriesData) {
       categories.add(CategoryInfo.fromFirebase(category.data(), category.id));
     }
+  }
+
+  Future<void> initProjects() async {
     projects.clear();
     QuerySnapshot<Map<String, dynamic>> projectsSnapshot = await instance
         .collection("projects")
-        .where("category_id",
-            isEqualTo: selectedCategory == null
-                ? null
-                : "/categories/$selectedCategory")
+        .where("category_id", isEqualTo: selectedCategory)
+        .orderBy("created_at")
+        .startAt([
+          categories.isNotEmpty
+              ? {
+                  "created_at":
+                      DateFormat("yyyy-MM-dd").format(projects.last.createdAt)
+                }
+              : null,
+        ])
+        .limit(1)
         .get();
     List<QueryDocumentSnapshot<Map<String, dynamic>>> projectsData =
         projectsSnapshot.docs;
@@ -51,7 +64,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
   @override
   void initState() {
-    init();
+    initCategories();
+    initProjects();
     super.initState();
   }
 
@@ -60,7 +74,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     Size _size = Size(context);
     return Container(
       width: _size.screenWidth(),
-      color: MyPalette.secondary_color,
+      color: MyPalette.primary_color,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: _size.width(96)),
         child: Column(
@@ -72,6 +86,14 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   Get.find<AppLocalizationController>()
                       .getTranslatedValue("portfolio"),
                   style: _size.textTheme(TextType.h2),
+                ),
+                SizedBox(width: _size.width(45)),
+                Container(
+                  height: _size.height(12),
+                  width: _size.width(345),
+                  decoration: BoxDecoration(
+                      color: MyPalette.secondary_color,
+                      borderRadius: BorderRadius.circular(_size.height(12))),
                 ),
               ],
             ),
@@ -112,7 +134,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                               padding: EdgeInsets.all(
                                 _size.width(projects[index].id == hoveredProject
                                     ? 0
-                                    : 50),
+                                    : 20),
                               ),
                               child: ClipRRect(
                                 child: Stack(
@@ -127,11 +149,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                                       Container(
                                         width: double.infinity,
                                         height: double.infinity,
-                                        color: MyPalette.third_color
+                                        color: MyPalette.secondary_color
                                             .withOpacity(0.82),
                                         alignment: Alignment.bottomCenter,
-                                        padding:
-                                            EdgeInsets.all(_size.width(80)),
+                                        padding: EdgeInsets.all(
+                                            _size.width(80) +
+                                                (projects[index].id ==
+                                                        hoveredProject
+                                                    ? 0
+                                                    : 20)),
                                         child: Text(
                                           projects[index].name,
                                           textAlign: TextAlign.center,
@@ -161,20 +187,18 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       children: [
         MouseRegion(
           child: GestureDetector(
-            onTap: () {
-              setState(() {
-                setState(() {
-                  selectedCategory = null;
-                });
-              });
+            onTap: () async {
+              selectedCategory = null;
+              await initProjects();
+              setState(() {});
             },
             child: Padding(
-              padding: EdgeInsets.only(right: _size.width(30)),
-              child: SelectableText(
+              padding: EdgeInsets.all(_size.width(15)),
+              child: Text(
                 Get.find<AppLocalizationController>().getTranslatedValue("all"),
                 style: _size.textTheme(TextType.p).copyWith(
                       color: selectedCategory == null
-                          ? MyPalette.third_color
+                          ? MyPalette.secondary_color
                           : _size.textTheme(TextType.p).color,
                     ),
               ),
@@ -186,18 +210,19 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               (category) => MouseRegion(
                 onHover: (_) {},
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     selectedCategory = category.id;
+                    await initProjects();
                     setState(() {});
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(right: _size.width(30)),
-                    child: SelectableText(
+                    padding: EdgeInsets.all(_size.width(15)),
+                    child: Text(
                       category.title,
                       style: _size.textTheme(TextType.p).copyWith(
                             color: selectedCategory != null &&
                                     selectedCategory == category.id
-                                ? MyPalette.third_color
+                                ? MyPalette.secondary_color
                                 : _size.textTheme(TextType.p).color,
                           ),
                     ),

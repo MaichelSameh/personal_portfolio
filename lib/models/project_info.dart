@@ -5,22 +5,26 @@ class ProjectInfo {
   late String _name;
   late String _id;
   late String _description;
+  late DateTime _createdAt;
 
   String get id => _id;
   String get name => _name;
   List<dynamic> get imageURL => _imageURL;
   String get description => _description;
+  DateTime get createdAt => _createdAt;
 
   ProjectInfo({
     required List<dynamic> imageURL,
     required String name,
     required String id,
     required String description,
+    required DateTime createdAt,
   }) {
     _imageURL = imageURL;
     _name = name;
     _id = id;
     _description = description;
+    _createdAt = createdAt;
   }
 
   void copyWith({
@@ -38,7 +42,7 @@ class ProjectInfo {
       'image_url': imageURL,
       'name': name,
       "description": description,
-      "crated_at": DateFormat("yyyy-MM-dd").format(DateTime.now()),
+      "crated_at": DateFormat("yyyy-MM-dd").format(createdAt),
     };
   }
 
@@ -47,6 +51,7 @@ class ProjectInfo {
     _name = map['title'];
     _id = id;
     _description = map["description"];
+    _createdAt = DateTime.parse(map["created_at"]);
   }
 
   @override

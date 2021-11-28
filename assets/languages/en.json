@@ -13,8 +13,16 @@
     "about_text": "Creative Mobile Application Developer talented at integrating novel design elements and interaction points to build new and exciting user experiences. Known for advancing Flutter apps through unique and unusual interfaces. Committed to presenting users with easy-to-use interfaces and entertainment elements.",
     "about_me": "About me",
     "all": "All",
-    "capability": "Capability",
+    "capability": "My Capabilities",
+    "skills": "Skills",
     "capability_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation.",
     "what_clients_says": "What my clients says",
-    "what_clients_says_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation."
+    "what_clients_says_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation.",
+    "hire_me_title": "Let’s Make Something Great Together",
+    "hire_me_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone#",
+    "budget": "Budget",
+    "message": "Message"
 }

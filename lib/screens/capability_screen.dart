@@ -58,7 +58,7 @@ class _CapabilityScreenState extends State<CapabilityScreen> {
           SizedBox(
             width: _size.width(345),
             child: const Divider(
-              color: MyPalette.third_color,
+              color: MyPalette.secondary_color,
               thickness: 2,
             ),
           ),
@@ -104,6 +104,7 @@ class _CapabilityScreenState extends State<CapabilityScreen> {
                     Text(
                       capabilities[index].description,
                       style: _size.textTheme(TextType.p),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 );

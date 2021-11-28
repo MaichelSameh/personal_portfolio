@@ -14,7 +14,7 @@ class AboutScreen extends StatelessWidget {
     Size _size = Size(context);
     return Container(
       width: _size.screenWidth(),
-      color: MyPalette.secondary_color,
+      color: MyPalette.primary_color,
       padding: EdgeInsets.symmetric(
         vertical: _size.height(141),
         horizontal: _size.width(87),
@@ -45,10 +45,22 @@ class AboutScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SelectableText(
-            Get.find<AppLocalizationController>()
-                .getTranslatedValue("about_me"),
-            style: _size.textTheme(TextType.h2),
+          Row(
+            children: [
+              SelectableText(
+                Get.find<AppLocalizationController>()
+                    .getTranslatedValue("about_me"),
+                style: _size.textTheme(TextType.h2),
+              ),
+              SizedBox(width: _size.width(45)),
+              Container(
+                height: _size.height(12),
+                width: _size.width(345),
+                decoration: BoxDecoration(
+                    color: MyPalette.secondary_color,
+                    borderRadius: BorderRadius.circular(_size.height(12))),
+              ),
+            ],
           ),
           SizedBox(height: _size.height(75)),
           SelectableText(

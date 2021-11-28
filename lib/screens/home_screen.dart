@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'screens.dart';
 
 class HomeScreen extends StatelessWidget {
   // ignore: constant_identifier_names
   static const String route_name = "home_screen";
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  final ItemScrollController controller = ItemScrollController();
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      WelcomeScreen(controller: controller),
+      const AboutScreen(),
+      const PortfolioScreen(),
+      const CapabilityScreen(),
+      const RepliesScreen(),
+      const ContactScreen(),
+      const FooterScreen(),
+    ];
     return Scaffold(
-      body: ListView(
+      body: ScrollablePositionedList.builder(
+        itemScrollController: controller,
         padding: EdgeInsets.zero,
-        children: const [
-          WelcomeScreen(),
-          AboutScreen(),
-          PortfolioScreen(),
-          CapabilityScreen(),
-          RepliesScreen(),
-          ContactScreen(),
-          FooterScreen(),
-        ],
+        itemBuilder: (ctx, index) {
+          return screens[index];
+        },
+        itemCount: screens.length,
       ),
     );
   }

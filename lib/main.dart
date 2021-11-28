@@ -30,7 +30,11 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: localization.locales,
-          home: const HomeScreen(),
+          initialRoute: HomeScreen.route_name,
+          routes: {
+            HomeScreen.route_name: (_) =>
+                HomeScreen(key: const Key(HomeScreen.route_name)),
+          },
           theme: ThemeData(
             scaffoldBackgroundColor: MyPalette.primary_color,
             fontFamily: "Poppins",

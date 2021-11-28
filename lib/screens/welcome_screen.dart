@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../config/palette.dart';
 import '../models/size.dart';
@@ -7,7 +8,8 @@ import '../controllers/localization_controller.dart';
 import '../widgets/widgets.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  final ItemScrollController controller;
+  const WelcomeScreen({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +18,12 @@ class WelcomeScreen extends StatelessWidget {
       width: _size.screenWidth(),
       color: MyPalette.primary_color,
       padding: EdgeInsets.symmetric(horizontal: _size.width(87)),
-      child: Stack(
+      child: Column(
         children: [
-          Column(
-            children: [
-              const SizedBox(width: double.infinity),
-              buildHeader(_size),
-              SizedBox(height: _size.height(42)),
-              buildInfoRow(_size),
-            ],
-          ),
-          Positioned(
-            top: 0,
-            left: _size.screenWidth() / 2 - _size.width(400),
-            child: DottelsContainer(
-              width: _size.width(590),
-              height: _size.height(243),
-            ),
-          ),
+          const SizedBox(width: double.infinity),
+          buildHeader(_size),
+          SizedBox(height: _size.height(42)),
+          buildInfoColumn(_size),
         ],
       ),
     );
@@ -44,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SelectableText(
-          Get.find<AppLocalizationController>().getTranslatedValue("portfolio"),
+          Get.find<AppLocalizationController>().getTranslatedValue("Maichel"),
           style: TextStyle(
             fontSize: _size.screenType == ScreensType.pc
                 ? 100
@@ -63,86 +53,46 @@ class WelcomeScreen extends StatelessWidget {
   Widget buildNavigatorRow(Size _size) {
     return SizedBox(
       height: _size.height(147),
-      child: Row(
-        children: [
-          SizedBox(
-            width: _size.width(460),
-            child: Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: _size.width(20)),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: _size.width(123),
-                        height: _size.height(117),
-                        color: MyPalette.third_color,
-                        margin: EdgeInsets.only(bottom: _size.height(3)),
-                      ),
-                      SizedBox(
-                        width: _size.width(123),
-                        child: const Divider(color: MyPalette.third_color),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: _size.height(35)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SelectableText(
-                        Get.find<AppLocalizationController>()
-                            .getTranslatedValue("about"),
-                        style: _size.textTheme(TextType.p),
-                      ),
-                      SelectableText(
-                        Get.find<AppLocalizationController>()
-                            .getTranslatedValue("portfolio"),
-                        style: _size.textTheme(TextType.p),
-                      ),
-                      SelectableText(
-                        Get.find<AppLocalizationController>()
-                            .getTranslatedValue("contact"),
-                        style: _size.textTheme(TextType.p),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+      child: SizedBox(
+        width: _size.width(500),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: _size.height(35)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              buildNavBarItem(_size, "about", true, 1),
+              buildNavBarItem(_size, "portfolio", false, 2),
+              buildNavBarItem(_size, "skills", false, 3),
+              buildNavBarItem(_size, "contact", false, 5),
+            ],
           ),
-          const CustomBorderedButton(
-            textKey: "get_start",
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget buildInfoRow(Size _size) {
-    return Stack(
-      alignment: Get.find<AppLocalizationController>().isRTLanguage
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
-      children: [
-        const BackgroundCircle(),
-        Row(
-          children: [
-            SizedBox(
-              width: _size.width(770),
-              child: buildInfoColumn(_size),
-            ),
-            Image.asset(
-              "assets/images/me.png",
-              fit: BoxFit.cover,
-              width: _size.width(908),
-              height: _size.height(1033),
-            ),
-          ],
+  buildNavBarItem(Size _size, String text, bool selected, int index) {
+    return GestureDetector(
+      onTap: () {
+        controller.jumpTo(index: index);
+      },
+      child: Container(
+        width: _size.width(123),
+        height: _size.height(160),
+        decoration: BoxDecoration(
+          color: selected ? MyPalette.secondary_color : Colors.transparent,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(_size.width(20)),
+            bottomRight: Radius.circular(_size.width(20)),
+          ),
         ),
-      ],
+        alignment: Alignment.bottomCenter,
+        padding: EdgeInsets.only(bottom: _size.height(10)),
+        child: SelectableText(
+          Get.find<AppLocalizationController>().getTranslatedValue(text),
+          style: _size.textTheme(TextType.p),
+        ),
+      ),
     );
   }
 
@@ -176,7 +126,7 @@ class WelcomeScreen extends StatelessWidget {
                         .getTranslatedValue("app") +
                     " ",
                 style: _size.textTheme(TextType.p).copyWith(
-                      color: MyPalette.third_color,
+                      color: MyPalette.secondary_color,
                     ),
               ),
               TextSpan(
@@ -201,14 +151,17 @@ class WelcomeScreen extends StatelessWidget {
           children: [
             CustomElevatedButton(
               textKey: "hire_me",
-              horizontalPadding: _size.width(79),
-              verticalPadding: _size.height(32),
+              onTap: () {
+                print("hire me");
+                controller.jumpTo(index: 5);
+              },
             ),
             SizedBox(width: _size.width(30)),
             CustomBorderedButton(
               textKey: "portfolio",
-              horizontalPadding: _size.width(79),
-              verticalPadding: _size.height(32),
+              onTap: () {
+                controller.jumpTo(index: 2);
+              },
             ),
           ],
         ),
