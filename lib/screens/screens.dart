@@ -6,3 +6,4 @@ export 'footer_screen.dart';
 export 'contact_screen.dart';
 export 'capability_screen.dart';
 export 'about_screen.dart';
+export 'menu_bar_screen.dart';

@@ -1,14 +1,6 @@
 import 'package:intl/intl.dart';
 
 class CategoryInfo {
-  late String _title;
-  late String _id;
-  late DateTime _createdAt;
-
-  String get title => _title;
-  String get id => _id;
-  DateTime get createdAt => _createdAt;
-
   CategoryInfo({
     required String id,
     required String title,
@@ -23,6 +15,20 @@ class CategoryInfo {
     _id = id;
     _createdAt = DateTime.tryParse(map["created_at"]) ?? DateTime.now();
   }
+
+  late DateTime _createdAt;
+  late String _id;
+  late String _title;
+
+  @override
+  String toString() =>
+      'CategoryInfo(_title: $_title, _id: $_id, _createdAt: $_createdAt)';
+
+  String get title => _title;
+
+  String get id => _id;
+
+  DateTime get createdAt => _createdAt;
 
   void copyWith({
     String? title,
@@ -40,8 +46,4 @@ class CategoryInfo {
       "crated_at": DateFormat("yyyy-MM-dd").format(DateTime.now()),
     };
   }
-
-  @override
-  String toString() =>
-      'CategoryInfo(_title: $_title, _id: $_id, _createdAt: $_createdAt)';
 }

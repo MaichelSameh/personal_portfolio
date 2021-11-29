@@ -24,7 +24,7 @@ class Size {
     return _constrain.maxWidth == 1 ? screenWidth() : _constrain.maxWidth;
   }
 
-  ScreensType get screenType {
+  ScreensType get screensType {
     return MediaQuery.of(_context).size.width >= 1000
         ? ScreensType.pc
         : MediaQuery.of(_context).size.width >= 700
@@ -58,9 +58,9 @@ class Size {
       case TextType.h1:
         return TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: screenType == ScreensType.pc
+          fontSize: screensType == ScreensType.pc
               ? 110
-              : screenType == ScreensType.tablet
+              : screensType == ScreensType.tablet
                   ? 80
                   : 30,
           color: Colors.white,
@@ -70,9 +70,9 @@ class Size {
       case TextType.h2:
         return TextStyle(
           fontWeight: FontWeight.w600,
-          fontSize: screenType == ScreensType.pc
+          fontSize: screensType == ScreensType.pc
               ? 40
-              : screenType == ScreensType.tablet
+              : screensType == ScreensType.tablet
                   ? 40
                   : 22,
           color: Colors.white,
@@ -81,9 +81,9 @@ class Size {
       case TextType.h3:
         return TextStyle(
           fontWeight: FontWeight.w300,
-          fontSize: screenType == ScreensType.pc
+          fontSize: screensType == ScreensType.pc
               ? 30
-              : screenType == ScreensType.tablet
+              : screensType == ScreensType.tablet
                   ? 25
                   : 18,
           color: Colors.white,
@@ -92,9 +92,9 @@ class Size {
       case TextType.btn:
         return TextStyle(
           fontWeight: FontWeight.w300,
-          fontSize: screenType == ScreensType.pc
+          fontSize: screensType == ScreensType.pc
               ? 20
-              : screenType == ScreensType.tablet
+              : screensType == ScreensType.tablet
                   ? 22
                   : 15,
           color: Colors.white,
@@ -103,9 +103,9 @@ class Size {
       case TextType.p:
         return TextStyle(
           fontWeight: FontWeight.w300,
-          fontSize: screenType == ScreensType.pc
+          fontSize: screensType == ScreensType.pc
               ? 15
-              : screenType == ScreensType.tablet
+              : screensType == ScreensType.tablet
                   ? 20
                   : 13,
           color: Colors.white,

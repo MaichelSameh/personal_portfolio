@@ -1,8 +1,4 @@
 class LanguageInfo {
-  late final String _countryCode;
-  late final String _flag;
-  late final String _languageCode;
-  late final String _title;
   LanguageInfo({
     required String countryCode,
     required String flag,
@@ -15,10 +11,10 @@ class LanguageInfo {
     _title = title;
   }
 
-  String get countryCode => _countryCode;
-  String get flag => _flag;
-  String get languageCode => _languageCode;
-  String get title => _title;
+  late final String _countryCode;
+  late final String _flag;
+  late final String _languageCode;
+  late final String _title;
 
   @override
   String toString() {
@@ -29,4 +25,12 @@ class LanguageInfo {
       title: $title
     ''';
   }
+
+  String get countryCode => _countryCode;
+
+  String get flag => _flag;
+
+  String get languageCode => _languageCode;
+
+  String get title => _title;
 }

@@ -1,20 +1,6 @@
 enum CommentStatus { accepted, rejected, pending }
 
 class CommentInfo {
-  late String _id;
-  late String _name;
-  late String _role;
-  late String _comment;
-  late CommentStatus _status;
-  late DateTime _createdAt;
-
-  String get id => _id;
-  String get name => _name;
-  String get role => _role;
-  String get comment => _comment;
-  CommentStatus get status => _status;
-  DateTime get createdAt => _createdAt;
-
   CommentInfo({
     required String id,
     required String name,
@@ -44,6 +30,30 @@ class CommentInfo {
     _createdAt = DateTime.parse(map["created_at"]);
   }
 
+  late String _comment;
+  late DateTime _createdAt;
+  late String _id;
+  late String _name;
+  late String _role;
+  late CommentStatus _status;
+
+  @override
+  String toString() {
+    return 'CommentInfo(_name: $_name, _role: $_role, _comment: $_comment, _status: $_status)';
+  }
+
+  String get id => _id;
+
+  String get name => _name;
+
+  String get role => _role;
+
+  String get comment => _comment;
+
+  CommentStatus get status => _status;
+
+  DateTime get createdAt => _createdAt;
+
   Map<String, dynamic> toMap() {
     String status = "";
     switch (_status) {
@@ -64,10 +74,5 @@ class CommentInfo {
       "status": status,
       "created_at": createdAt,
     };
-  }
-
-  @override
-  String toString() {
-    return 'CommentInfo(_name: $_name, _role: $_role, _comment: $_comment, _status: $_status)';
   }
 }

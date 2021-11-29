@@ -19,16 +19,19 @@ class HomeScreen extends StatelessWidget {
       const CapabilityScreen(),
       const RepliesScreen(),
       const ContactScreen(),
-      const FooterScreen(),
+      FooterScreen(controller: controller),
     ];
     return Scaffold(
-      body: ScrollablePositionedList.builder(
-        itemScrollController: controller,
-        padding: EdgeInsets.zero,
-        itemBuilder: (ctx, index) {
-          return screens[index];
-        },
-        itemCount: screens.length,
+      body: SizedBox(
+        // height: 4000,
+        child: ScrollablePositionedList.builder(
+          itemScrollController: controller,
+          padding: EdgeInsets.zero,
+          itemBuilder: (ctx, index) {
+            return screens[index];
+          },
+          itemCount: screens.length,
+        ),
       ),
     );
   }

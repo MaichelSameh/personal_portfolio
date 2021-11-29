@@ -1,20 +1,6 @@
+import 'package:intl/intl.dart';
+
 class ContractInfo {
-  late String _id;
-  late String _email;
-  late String _message;
-  late String _name;
-  late String _phone;
-  late double _budget;
-  late DateTime _createdAt;
-
-  String get id => _id;
-  String get email => _email;
-  String get message => _message;
-  String get name => _name;
-  String get phone => _phone;
-  double get budget => _budget;
-  DateTime get createdAt => _createdAt;
-
   ContractInfo({
     required String id,
     required String email,
@@ -43,8 +29,41 @@ class ContractInfo {
     _phone = map["phone"];
   }
 
+  late double _budget;
+  late DateTime _createdAt;
+  late String _email;
+  late String _id;
+  late String _message;
+  late String _name;
+  late String _phone;
+
   @override
   String toString() {
     return 'ContractInfo(_email: $_email, _message: $_message, _name: $_name, _phone: $_phone, _budget: $_budget, _createdAt: $_createdAt)';
+  }
+
+  String get id => _id;
+
+  String get email => _email;
+
+  String get message => _message;
+
+  String get name => _name;
+
+  String get phone => _phone;
+
+  double get budget => _budget;
+
+  DateTime get createdAt => _createdAt;
+
+  Map<String, dynamic> toMap() {
+    return {
+      "budget": budget,
+      "created_at": DateFormat("yyyy-MM-dd").format(createdAt),
+      "email": email,
+      "message": message,
+      "name": name,
+      "phone": phone,
+    };
   }
 }

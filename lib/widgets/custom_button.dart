@@ -5,7 +5,7 @@ import '../config/palette.dart';
 import '../models/size.dart';
 import '../controllers/localization_controller.dart';
 
-class CustomBorderedButton extends StatelessWidget {
+class CustomBorderedButton extends StatefulWidget {
   final void Function()? onTap;
   final String textKey;
   final double? width;
@@ -19,23 +19,42 @@ class CustomBorderedButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomBorderedButton> createState() => _CustomBorderedButtonState();
+}
+
+class _CustomBorderedButtonState extends State<CustomBorderedButton> {
+  Color color = Colors.transparent;
+  @override
   Widget build(BuildContext context) {
     Size _size = Size(context);
     return MouseRegion(
       cursor: SystemMouseCursors.click,
+      onHover: (_) {
+        setState(() {
+          color = MyPalette.secondary_color.withOpacity(0.4);
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          color = Colors.transparent;
+        });
+      },
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Container(
-          width: width ?? _size.width(297),
-          height: height ?? _size.height(96),
+          width: widget.width ??
+              (_size.screensType == ScreensType.mobile ? 250 : 297),
+          height: widget.height ??
+              (_size.screensType == ScreensType.mobile ? 62 : 96),
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: color,
             border: Border.all(color: Colors.white, width: 2),
-            borderRadius: BorderRadius.circular(_size.width(30)),
+            borderRadius: BorderRadius.circular(15),
           ),
           alignment: Alignment.center,
           child: Text(
-            Get.find<AppLocalizationController>().getTranslatedValue(textKey),
+            Get.find<AppLocalizationController>()
+                .getTranslatedValue(widget.textKey),
             style: _size.textTheme(TextType.btn),
           ),
         ),
@@ -44,7 +63,7 @@ class CustomBorderedButton extends StatelessWidget {
   }
 }
 
-class CustomElevatedButton extends StatelessWidget {
+class CustomElevatedButton extends StatefulWidget {
   final void Function()? onTap;
   final String textKey;
   final double? width;
@@ -54,22 +73,41 @@ class CustomElevatedButton extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<CustomElevatedButton> createState() => _CustomElevatedButtonState();
+}
+
+class _CustomElevatedButtonState extends State<CustomElevatedButton> {
+  Color color = MyPalette.secondary_color;
+  @override
   Widget build(BuildContext context) {
     Size _size = Size(context);
     return MouseRegion(
+      onHover: (_) {
+        setState(() {
+          color = MyPalette.secondary_color.withOpacity(0.4);
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          color = MyPalette.secondary_color;
+        });
+      },
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Container(
           decoration: BoxDecoration(
-            color: MyPalette.secondary_color,
-            borderRadius: BorderRadius.circular(_size.width(30)),
+            color: color,
+            borderRadius: BorderRadius.circular(15),
           ),
-          width: width ?? _size.width(297),
-          height: height ?? _size.height(96),
+          width: widget.width ??
+              (_size.screensType == ScreensType.mobile ? 250 : 297),
+          height: widget.height ??
+              (_size.screensType == ScreensType.mobile ? 62 : 96),
           alignment: Alignment.center,
           child: Text(
-            Get.find<AppLocalizationController>().getTranslatedValue(textKey),
+            Get.find<AppLocalizationController>()
+                .getTranslatedValue(widget.textKey),
             style: _size.textTheme(TextType.btn),
           ),
         ),

@@ -20,6 +20,7 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,7 +28,7 @@
   <meta name="apple-mobile-web-app-title" content="freexd_personal_portfolio">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>freexd_personal_portfolio</title>
+  <title>Maichel Sameh</title>
   <link rel="manifest" href="manifest.json">
 </head>
 
@@ -55,7 +56,16 @@
     // .env --> root folder
     // API_KEY=AS;DLKFJASD;LFKJA SDKLF
     // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-    
+    var firebaseConfig = {
+      // apiKey: process.env.API_KEY,
+      apiKey: "AIzaSyCGRrpZyScGHLAR19-EcjDZ-6QA4a2MG_I",
+      authDomain: "my-portfolio-cbdbd.firebaseapp.com",
+      projectId: "my-portfolio-cbdbd",
+      storageBucket: "my-portfolio-cbdbd.appspot.com",
+      messagingSenderId: "751591315244",
+      appId: "1:751591315244:web:19cb6b992bee81af513e89",
+      measurementId: "G-0QNBTQPWT2"
+    };
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);

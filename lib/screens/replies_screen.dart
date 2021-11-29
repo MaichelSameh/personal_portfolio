@@ -43,20 +43,10 @@ class _RepliesScreenState extends State<RepliesScreen> {
   }
 
   Widget buildCommentSection(Size _size) {
-    CarouselOptions carouselOptions = CarouselOptions(
-      autoPlay: true,
-      autoPlayAnimationDuration: const Duration(seconds: 3),
-      enlargeCenterPage: true,
-      enableInfiniteScroll: false,
-      aspectRatio: 1,
-      onPageChanged: (value, _) {
-        currentComment = comments[value].id;
-        setState(() {});
-      },
-    );
     // ignore: unrelated_type_equality_checks
-    if (_size.screenType != ScreenType.Phone) {
+    if (_size.screensType != ScreensType.mobile) {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Transform.rotate(
             angle: pi,
@@ -78,7 +68,16 @@ class _RepliesScreenState extends State<RepliesScreen> {
               items: comments
                   .map<Widget>((comment) => buildComment(_size, comment))
                   .toList(),
-              options: carouselOptions,
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayAnimationDuration: const Duration(seconds: 3),
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                onPageChanged: (value, _) {
+                  currentComment = comments[value].id;
+                  setState(() {});
+                },
+              ),
             ),
           ),
           Container(
@@ -98,13 +97,23 @@ class _RepliesScreenState extends State<RepliesScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            width: _size.width(841),
-            height: _size.height(647),
+            width: _size.screenWidth(),
+            height: 400,
             child: CarouselSlider(
               items: comments
                   .map<Widget>((comment) => buildComment(_size, comment))
                   .toList(),
-              options: carouselOptions,
+              options: CarouselOptions(
+                autoPlay: true,
+                autoPlayAnimationDuration: const Duration(seconds: 3),
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                height: 400,
+                onPageChanged: (value, _) {
+                  currentComment = comments[value].id;
+                  setState(() {});
+                },
+              ),
             ),
           ),
           Row(
@@ -112,8 +121,8 @@ class _RepliesScreenState extends State<RepliesScreen> {
             children: comments
                 .map<Widget>(
                   (comment) => Container(
-                    width: _size.width(5),
-                    height: _size.width(5),
+                    width: 5,
+                    height: 5,
                     margin: EdgeInsets.symmetric(horizontal: _size.width(40)),
                     decoration: BoxDecoration(
                       color: comment.id == currentComment
@@ -188,6 +197,7 @@ class _RepliesScreenState extends State<RepliesScreen> {
             style: _size.textTheme(TextType.h2),
           ),
           Container(
+            margin: const EdgeInsets.only(top: 30),
             width: _size.width(345),
             height: 2,
             decoration: BoxDecoration(

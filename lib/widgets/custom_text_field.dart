@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../config/palette.dart';
 import '../controllers/localization_controller.dart';
 import '../models/size.dart';
 
@@ -23,6 +21,7 @@ class CustomTextField extends StatelessWidget {
     String? headerKey,
     TextStyle? hintStyle,
     void Function(String)? onChange,
+    Alignment? alignment,
     TextInputType keyboardType = TextInputType.text,
   }) : super(key: key) {
     _border = border;
@@ -39,6 +38,7 @@ class CustomTextField extends StatelessWidget {
     _width = width;
     _onChange = onChange;
     _keyboardType = keyboardType;
+    _alignment = alignment;
   }
 
   late final void Function(String)? _onChange;
@@ -56,6 +56,7 @@ class CustomTextField extends StatelessWidget {
   late final int? _minLines;
   late final bool _obscureText;
   late final double? _width;
+  late final Alignment? _alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -77,46 +78,47 @@ class CustomTextField extends StatelessWidget {
           color: Colors.transparent,
           child: Container(
             width: _width,
-            height: _height ?? 89,
+            height:
+                _height ?? (_size.screensType == ScreensType.mobile ? 47 : 89),
             decoration: BoxDecoration(
-              borderRadius: _border ?? BorderRadius.circular(_size.width(30)),
+              borderRadius: _border ?? BorderRadius.circular(15),
               border: Border.all(color: Colors.white),
             ),
-            padding: EdgeInsets.symmetric(horizontal: _size.width(15)),
-            child: Center(
-              child: TextField(
-                maxLength: _maxLength,
-                expands: _expands,
-                maxLines: _expands ? null : _maxLines,
-                minLines: _expands ? null : _minLines,
-                controller: _controller,
-                textAlignVertical: TextAlignVertical.center,
-                textDirection:
+            padding: const EdgeInsets.all(15),
+            alignment: _alignment ?? Alignment.center,
+            child: TextField(
+              maxLength: _maxLength,
+              expands: _expands,
+              maxLines: _expands ? null : _maxLines,
+              minLines: _expands ? null : _minLines,
+              controller: _controller,
+              cursorColor: Colors.white.withOpacity(0.7),
+              style: _size.textTheme(TextType.btn),
+              textAlignVertical: TextAlignVertical.center,
+              textDirection: Get.find<AppLocalizationController>().isRTLanguage
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              decoration: InputDecoration(
+                hintTextDirection:
                     Get.find<AppLocalizationController>().isRTLanguage
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                decoration: InputDecoration(
-                  hintTextDirection:
-                      Get.find<AppLocalizationController>().isRTLanguage
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
-                  alignLabelWithHint: true,
-                  border: const OutlineInputBorder(borderSide: BorderSide.none),
-                  enabledBorder:
-                      const OutlineInputBorder(borderSide: BorderSide.none),
-                  errorBorder:
-                      const OutlineInputBorder(borderSide: BorderSide.none),
-                  hintText: Get.find<AppLocalizationController>()
-                      .getTranslatedValue(_hintKey),
-                  hintStyle: _hintStyle ??
-                      Theme.of(context).textTheme.bodyText1!.copyWith(
-                          color: const Color.fromRGBO(196, 198, 204, 1)),
-                  contentPadding: EdgeInsets.zero,
-                ),
-                obscureText: _obscureText,
-                onChanged: _onChange,
-                keyboardType: _keyboardType,
+                alignLabelWithHint: true,
+                border: const OutlineInputBorder(borderSide: BorderSide.none),
+                enabledBorder:
+                    const OutlineInputBorder(borderSide: BorderSide.none),
+                errorBorder:
+                    const OutlineInputBorder(borderSide: BorderSide.none),
+                hintText: Get.find<AppLocalizationController>()
+                    .getTranslatedValue(_hintKey),
+                hintStyle: _hintStyle ??
+                    Theme.of(context).textTheme.bodyText1!.copyWith(
+                        color: const Color.fromRGBO(196, 198, 204, 1)),
+                contentPadding: EdgeInsets.zero,
               ),
+              obscureText: _obscureText,
+              onChanged: _onChange,
+              keyboardType: _keyboardType,
             ),
           ),
         ),

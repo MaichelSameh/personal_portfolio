@@ -1,16 +1,6 @@
 import 'package:intl/intl.dart';
 
 class CapabilityInfo {
-  late String _id;
-  late String _title;
-  late String _description;
-  late String _imageURL;
-
-  String get id => _id;
-  String get title => _title;
-  String get description => _description;
-  String get imageURL => _imageURL;
-
   CapabilityInfo({
     required String id,
     required String title,
@@ -30,6 +20,24 @@ class CapabilityInfo {
     _imageURL = map["image_url"];
   }
 
+  late String _description;
+  late String _id;
+  late String _imageURL;
+  late String _title;
+
+  @override
+  String toString() {
+    return 'CapabilityInfo(_id: $_id, _title: $_title, _description: $_description, _imageURL: $_imageURL)';
+  }
+
+  String get id => _id;
+
+  String get title => _title;
+
+  String get description => _description;
+
+  String get imageURL => _imageURL;
+
   Map<String, dynamic> toMap() {
     return {
       "title": title,
@@ -37,10 +45,5 @@ class CapabilityInfo {
       "image_url": imageURL,
       "crated_at": DateFormat("yyyy-MM-dd").format(DateTime.now()),
     };
-  }
-
-  @override
-  String toString() {
-    return 'CapabilityInfo(_id: $_id, _title: $_title, _description: $_description, _imageURL: $_imageURL)';
   }
 }

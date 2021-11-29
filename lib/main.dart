@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
           routes: {
             HomeScreen.route_name: (_) =>
                 HomeScreen(key: const Key(HomeScreen.route_name)),
+            MenuBarScreen.route_name: (_) =>
+                const MenuBarScreen(key: Key(MenuBarScreen.route_name)),
           },
           theme: ThemeData(
             scaffoldBackgroundColor: MyPalette.primary_color,

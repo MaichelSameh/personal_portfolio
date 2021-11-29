@@ -22,7 +22,9 @@
     "hire_me_text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et t enim ad minim veniam, quis nostrud exercitation.",
     "name": "Name",
     "email": "Email",
-    "phone": "Phone#",
+    "phone": "Phone",
     "budget": "Budget",
-    "message": "Message"
+    "message": "Message",
+    "egypt": "Egypt",
+    "copyright_text": "Copyright © 2021 | All rights reserved"
 }
